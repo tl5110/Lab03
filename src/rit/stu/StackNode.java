@@ -12,7 +12,7 @@ import rit.cs.Stack;
  * @author Tiffany Lee
  */
 public class StackNode<T> implements Stack<T> {
-    Node<T> top = new Node<T>(null, null);
+    Node<T> top;
 
     /**
      * Create an empty stack.
@@ -27,7 +27,7 @@ public class StackNode<T> implements Stack<T> {
      */
     @Override
     public boolean empty() {
-        return top.getData() == null;
+        return this.top == null;
     }
 
     /**
@@ -40,7 +40,7 @@ public class StackNode<T> implements Stack<T> {
     public T pop() {
         assert !empty();
         T og = top.getData();
-        top.setData(top.getNext().getData());
+        this.top = top.getNext();
         return og;
     }
 
@@ -50,16 +50,18 @@ public class StackNode<T> implements Stack<T> {
      */
     @Override
     public void push(T element) {
-        top.setNext(top);
-        top.setData(element);
+        top = new Node<>(element, top);
     }
 
     /**
      * Gets the top element of the stack
+     * @pre stack must not be empty
+     * @throws AssertionError if stack is empty
      * @return the top element
      */
     @Override
     public T top() {
+        assert !empty();
         return top.getData();
     }
 }
