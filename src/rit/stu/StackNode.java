@@ -12,6 +12,9 @@ import rit.cs.Stack;
  * @author Tiffany Lee
  */
 public class StackNode<T> implements Stack<T> {
+    /**
+     * The top element in a stack
+     */
     Node<T> top;
 
     /**
