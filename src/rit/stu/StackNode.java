@@ -12,14 +12,10 @@ import rit.cs.Stack;
  * @author Tiffany Lee
  */
 public class StackNode<T> implements Stack<T> {
-    /**
-     * The top element in a stack
-     */
+    /** The top element in a stack */
     Node<T> top;
 
-    /**
-     * Create an empty stack.
-     */
+    /** Create an empty stack */
     public StackNode() {
         this.top = null;
     }

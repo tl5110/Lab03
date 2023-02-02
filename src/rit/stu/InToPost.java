@@ -44,7 +44,7 @@ import java.util.Scanner;
  *  A B + C * D E - -<br>
  * <br>
  * @author RIT CS
- * @author YOUR NAME HERE
+ * @author Tiffany Lee
  */
 public class InToPost {
     /** The add operator */
@@ -123,10 +123,26 @@ public class InToPost {
      * @param tokens the list of tokens (strings) in infix form
      * @return a new queue of tokens (strings) in postfix form
      */
-    private Queue<String> convert(List<String> tokens) {
-        // TODO
-        // YOUR IMPLEMENTATION HERE
-        return null;   // replace this
+    private Queue<String> convert(List<String> tokens) throws FileNotFoundException {
+        Stack<String> opStack = null;
+        QueueNode<String> postFix = null;
+        for(String item: tokens){
+            if(item.matches("[a-zA-Z]+")){
+                postFix.enqueue(item);
+            } else if(item.equals("(")){
+                opStack.push(item);
+            } else if(item.equals(")")){
+                while(!opStack.top().equals("(")){
+                    postFix.enqueue(opStack.pop());
+                }
+            } else {
+                while(greaterEqualPrecedence(opStack.top(), item)){
+                    postFix.enqueue(opStack.pop());
+                }
+//                opStack.push(item);
+            }
+        }
+        return postFix;
     }
 
     /**
