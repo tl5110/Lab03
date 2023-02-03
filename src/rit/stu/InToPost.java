@@ -125,9 +125,10 @@ public class InToPost {
      * @return a new queue of tokens (strings) in postfix form
      */
     private Queue<String> convert(List<String> tokens) throws FileNotFoundException {
+        //initializes opStack and postFix
         StackNode<String> opStack = new StackNode<>();
         QueueNode<String> postFix = new QueueNode<>();
-
+        // Conversion from infix to postfix
         for(String item: tokens) {
             if (item.matches("[a-zA-Z]+")) {
                 postFix.enqueue(item);
