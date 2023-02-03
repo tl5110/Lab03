@@ -72,6 +72,7 @@ public class InToPost {
      */
     private Map<String, Integer> precedence;
 
+
     /**
      * Create a new IntoPost object.
      * @param filename The name of the infix source file
@@ -124,23 +125,30 @@ public class InToPost {
      * @return a new queue of tokens (strings) in postfix form
      */
     private Queue<String> convert(List<String> tokens) throws FileNotFoundException {
-        Stack<String> opStack = null;
-        QueueNode<String> postFix = null;
-        for(String item: tokens){
-            if(item.matches("[a-zA-Z]+")){
+        StackNode<String> opStack = new StackNode<>();
+        QueueNode<String> postFix = new QueueNode<>();
+
+        for(String item: tokens) {
+            if (item.matches("[a-zA-Z]+")) {
                 postFix.enqueue(item);
-            } else if(item.equals("(")){
+            } else if (opStack.empty()) {
                 opStack.push(item);
-            } else if(item.equals(")")){
-                while(!opStack.top().equals("(")){
+            } else if (item.equals(OPEN_PAREN)) {
+                opStack.push(item);
+            } else if (item.equals(CLOSE_PAREN)) {
+                while (!opStack.top().equals(OPEN_PAREN)) {
                     postFix.enqueue(opStack.pop());
                 }
+                opStack.pop();
             } else {
-                while(greaterEqualPrecedence(opStack.top(), item)){
+                while(!opStack.empty() && greaterEqualPrecedence(opStack.top(), item)) {
                     postFix.enqueue(opStack.pop());
                 }
-//                opStack.push(item);
+                opStack.push(item);
             }
+        }
+        while(!opStack.empty()){
+            postFix.enqueue(opStack.pop());
         }
         return postFix;
     }
