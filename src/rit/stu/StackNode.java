@@ -13,7 +13,7 @@ import rit.cs.Stack;
  */
 public class StackNode<T> implements Stack<T> {
     /** The top element in a stack */
-    Node<T> top;
+    private Node<T> top;
 
     /** Create an empty stack */
     public StackNode() {

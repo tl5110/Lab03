@@ -12,9 +12,9 @@ import rit.cs.QueueList;
  */
 public class QueueNode<T> implements Queue<T> {
     /** The front or first element in the queue */
-    Node<T> front;
+    private Node<T> front;
     /** The back or last element in the queue */
-    Node<T> back;
+    private Node<T> back;
 
     /** Create an empty queue */
     public QueueNode() {
