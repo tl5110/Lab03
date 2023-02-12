@@ -9,6 +9,7 @@ import rit.cs.QueueList;
  *
  * @param <T> The type of data the queue will hold
  * @author RIT CS
+ * @author Tiffany Lee
  */
 public class QueueNode<T> implements Queue<T> {
     /** The front or first element in the queue */
